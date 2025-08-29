@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Alumno - Modificación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #3b5998;
+            --secondary-color: #8b9dc3;
+            --accent-color: #dfe3ee;
+            --light-color: #f7f7f7;
+            --dark-color: #343a40;
+        }
+        body { background-color: #f5f5f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar-brand { font-weight: bold; font-size: 1.5rem; }
+        .card { border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; border: none; }
+        .card-header { background-color: var(--primary-color); color: white; border-radius: 10px 10px 0 0 !important; font-weight: bold; }
+        .section-title { color: var(--primary-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; margin-bottom: 20px; }
+        .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
+        .btn-primary:hover { background-color: #2d4373; border-color: #2d4373; }
+        .form-label { font-weight: 500; }
+        .required::after { content: " *"; color: red; }
+        .boolean-section { background-color: var(--accent-color); padding: 15px; border-radius: 8px; }
+        .form-check-input:checked { background-color: var(--primary-color); border-color: var(--primary-color); }
+        .success-alert { display: none; position: fixed; top: 20px; right: 20px; z-index: 9999; animation: fadeIn 0.5s, fadeOut 0.5s 2.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+        .form-section { margin-bottom: 25px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary-color);">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-book-half me-2"></i>Ficha Alumno</a>
+            <a class="btn btn-outline-light ms-3" href="alumnos.html">
+                <i class="bi bi-list"></i> Ver Alumnos
+            </a>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2 class="section-title">Modificación de Datos Estudiantiles</h2>
+        <form id="studentForm">
+            <div class="card">
+                <div class="card-header"><i class="bi bi-person-circle me-2"></i>Datos Personales</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_rut" class="form-label required">RUT</label>
+                            <input type="text" class="form-control" id="entry_rut" maxlength="12" placeholder="12345678-9" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_nombre" class="form-label required">Nombre Completo</label>
+                            <input type="text" class="form-control" id="entry_nombre" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_fecha_nacimiento" class="form-label required">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="entry_fecha_nacimiento" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="entry_direccion">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_colegio_procedencia" class="form-label">Colegio de Procedencia</label>
+                            <input type="text" class="form-control" id="entry_colegio_procedencia">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_cursos_repetidos" class="form-label">Cursos Repetidos</label>
+                            <input type="number" class="form-control" id="entry_cursos_repetidos" min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><i class="bi bi-people-fill me-2"></i>Datos Familiares</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_nombre_padre" class="form-label">Nombre del Padre</label>
+                            <input type="text" class="form-control" id="entry_nombre_padre">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_rut_padre" class="form-label">RUT del Padre</label>
+                            <input type="text" class="form-control" id="entry_rut_padre" maxlength="12" placeholder="12345678-9">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_nombre_madre" class="form-label">Nombre de la Madre</label>
+                            <input type="text" class="form-control" id="entry_nombre_madre">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_rut_madre" class="form-label">RUT de la Madre</label>
+                            <input type="text" class="form-control" id="entry_rut_madre" maxlength="12" placeholder="12345678-9">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_nombre_contest_encuesta" class="form-label">Quien contesta encuesta</label>
+                            <input type="text" class="form-control" id="entry_nombre_contest_encuesta">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_jefe_hogar" class="form-label">Con quién vive</label>
+                            <input type="text" class="form-control" id="entry_jefe_hogar">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_vive_hogar" class="form-label">Cuántos viven en el hogar</label>
+                            <input type="number" class="form-control" id="entry_vive_hogar" min="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_titular" class="form-label">Apoderado Titular</label>
+                            <input type="text" class="form-control" id="entry_titular">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_titrut" class="form-label">RUT Titular</label>
+                            <input type="text" class="form-control" id="entry_titrut" maxlength="12" placeholder="12345678-9">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_titphone" class="form-label">Celular Titular</label>
+                            <input type="tel" class="form-control" id="entry_titphone">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_suplente" class="form-label">Apoderado Suplente</label>
+                            <input type="text" class="form-control" id="entry_suplente">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_suprut" class="form-label">RUT Suplente</label>
+                            <input type="text" class="form-control" id="entry_suprut" maxlength="12" placeholder="12345678-9">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_supphone" class="form-label">Celular Suplente</label>
+                            <input type="tel" class="form-control" id="entry_supphone">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_n_hermanos" class="form-label">N° de Hermanos</label>
+                            <input type="number" class="form-control" id="entry_n_hermanos" min="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_hermanos_estudian" class="form-label">Hermanos que Estudian</label>
+                            <input type="number" class="form-control" id="entry_hermanos_estudian" min="0">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_hermanos_no_estudian" class="form-label">Hermanos que No Estudian</label>
+                            <input type="number" class="form-control" id="entry_hermanos_no_estudian" min="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_otros_viven" class="form-label">Otros que viven</label>
+                            <input type="number" class="form-control" id="entry_otros_viven" min="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_ocupacion_madre" class="form-label">Ocupación Madre</label>
+                            <input type="text" class="form-control" id="entry_ocupacion_madre">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="selected_ano_madre" class="form-label">Estudios Madre</label>
+                            <select class="form-select" id="selected_ano_madre">
+                                <option value="Nulo">Seleccionar</option>
+                                <option>Sin estudios</option>
+                                <option>1ro Basico</option>
+                                <option>2do Basico</option>
+                                <option>3ro Basico</option>
+                                <option>4to Basico</option>
+                                <option>5to Basico</option>
+                                <option>6to Basico</option>
+                                <option>7mo Basico</option>
+                                <option>8vo Basico</option>
+                                <option>1ro Medio</option>
+                                <option>2do Medio</option>
+                                <option>3ro Medio</option>
+                                <option>4to Medio</option>
+                                <option>Superior Incompleta</option>
+                                <option>Superior</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_ocupacion_jefe" class="form-label">Ocupación Jefe de Hogar</label>
+                            <input type="text" class="form-control" id="entry_ocupacion_jefe">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="selected_ano_jefe" class="form-label">Estudios Jefe</label>
+                            <select class="form-select" id="selected_ano_jefe">
+                                <option value="Nulo">Seleccionar</option>
+                                <option>Sin estudios</option>
+                                <option>1ro Basico</option>
+                                <option>2do Basico</option>
+                                <option>3ro Basico</option>
+                                <option>4to Basico</option>
+                                <option>5to Basico</option>
+                                <option>6to Basico</option>
+                                <option>7mo Basico</option>
+                                <option>8vo Basico</option>
+                                <option>1ro Medio</option>
+                                <option>2do Medio</option>
+                                <option>3ro Medio</option>
+                                <option>4to Medio</option>
+                                <option>Superior Incompleta</option>
+                                <option>Superior</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><i class="bi bi-book me-2"></i>Datos Académicos</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="selected_option" class="form-label">Curso</label>
+                            <select class="form-select" id="selected_option">
+                                <option value="Nulo">Seleccionar</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="selected_letra" class="form-label">Letra</label>
+                            <select class="form-select" id="selected_letra">
+                                <option value="Nulo">Seleccionar</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                                <option>G</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_aprende" class="form-label">¿Cómo aprende?</label>
+                            <input type="text" class="form-control" id="entry_aprende">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_estudia" class="form-label">Estudia</label>
+                            <input type="text" class="form-control" id="entry_estudia">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_religion" class="form-label">Religión</label>
+                            <input type="text" class="form-control" id="entry_religion">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_psicolog" class="form-label">Asistencia a Especialista</label>
+                            <input type="text" class="form-control" id="entry_psicolog">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><i class="bi bi-toggle-on me-2"></i>Opciones Booleanas</div>
+                <div class="card-body">
+                    <div class="row boolean-section">
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chile_solidario_var">
+                                <label class="form-check-label" for="chile_solidario_var">Chile Solidario</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="presento_certificado_var">
+                                <label class="form-check-label" for="presento_certificado_var">Presentó Certificado</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="necesita_PAE_var">
+                                <label class="form-check-label" for="necesita_PAE_var">Necesita PAE</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="figura_pate_var">
+                                <label class="form-check-label" for="figura_pate_var">Figura Paterna</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fig_aporta_recursos_var">
+                                <label class="form-check-label" for="fig_aporta_recursos_var">Figura Aporta Recursos</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="locomocion_var">
+                                <label class="form-check-label" for="locomocion_var">Locomoción</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="asistereligion_var">
+                                <label class="form-check-label" for="asistereligion_var">Asiste a Religión</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><i class="bi bi-activity me-2"></i>Salud y PIE</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_enfermedad" class="form-label">Enfermedad</label>
+                            <input type="text" class="form-control" id="entry_enfermedad">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_pie" class="form-label">Necesita PIE</label>
+                            <input type="text" class="form-control" id="entry_pie">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><i class="bi bi-telephone me-2"></i>Información de Contacto</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_emergencia" class="form-label">Contacto de Emergencia</label>
+                            <input type="text" class="form-control" id="entry_emergencia">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_domicilio" class="form-label">Domicilio</label>
+                            <input type="text" class="form-control" id="entry_domicilio">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="entry_celular" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="entry_celular">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="reset" class="btn btn-secondary me-2"><i class="bi bi-x-circle me-1"></i> Limpiar</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-1"></i> Guardar Cambios</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="alert alert-success success-alert" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i> Los datos se han guardado correctamente.
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function validarRUT(rut) {
+            const patron = /^[0-9]{7,8}-[0-9kK]{1}$/;
+            return patron.test(rut);
+        }
+        document.getElementById('entry_rut').addEventListener('input', function(e) {
+            let valor = this.value.replace(/[^0-9kK]/g, '').toUpperCase();
+            if (valor.length > 1) {
+                this.value = valor.slice(0, -1) + '-' + valor.slice(-1);
+            } else {
+                this.value = valor;
+            }
+        });
+        document.getElementById('studentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const rut = document.getElementById('entry_rut').value;
+            const nombre = document.getElementById('entry_nombre').value;
+            const fechaNacimiento = document.getElementById('entry_fecha_nacimiento').value;
+            const curso = document.getElementById('selected_option').value;
+            const letra = document.getElementById('selected_letra').value;
+            if (!rut || !nombre || !fechaNacimiento) {
+                alert('Por favor, complete los campos obligatorios (RUT, Nombre y Fecha de Nacimiento)');
+                return;
+            }
+            if (!validarRUT(rut)) {
+                alert('El RUT ingresado no tiene un formato válido. Use el formato: 12345678-9');
+                return;
+            }
+            if (curso === "Nulo" || letra === "Nulo") {
+                alert('Curso o Letra no pueden ser Nulo');
+                return;
+            }
+            // Recolectar todos los datos del formulario
+            const data = {
+                rut,
+                nombre,
+                fecha_nacimiento: fechaNacimiento,
+                direccion: document.getElementById('entry_direccion').value,
+                colegio_procedencia: document.getElementById('entry_colegio_procedencia').value,
+                cursos_repetidos: document.getElementById('entry_cursos_repetidos').value,
+                nombre_padre: document.getElementById('entry_nombre_padre').value,
+                rut_padre: document.getElementById('entry_rut_padre').value,
+                nombre_madre: document.getElementById('entry_nombre_madre').value,
+                rut_madre: document.getElementById('entry_rut_madre').value,
+                nombre_contest_encuesta: document.getElementById('entry_nombre_contest_encuesta').value,
+                jefe_hogar: document.getElementById('entry_jefe_hogar').value,
+                vive_hogar: document.getElementById('entry_vive_hogar').value,
+                titular: document.getElementById('entry_titular').value,
+                titrut: document.getElementById('entry_titrut').value,
+                titphone: document.getElementById('entry_titphone').value,
+                suplente: document.getElementById('entry_suplente').value,
+                suprut: document.getElementById('entry_suprut').value,
+                supphone: document.getElementById('entry_supphone').value,
+                n_hermanos: document.getElementById('entry_n_hermanos').value,
+                hermanos_estudian: document.getElementById('entry_hermanos_estudian').value,
+                hermanos_no_estudian: document.getElementById('entry_hermanos_no_estudian').value,
+                otros_viven: document.getElementById('entry_otros_viven').value,
+                ocupacion_madre: document.getElementById('entry_ocupacion_madre').value,
+                ocupacion_jefe: document.getElementById('entry_ocupacion_jefe').value,
+                psicolog: document.getElementById('entry_psicolog').value,
+                aprende: document.getElementById('entry_aprende').value,
+                estudia: document.getElementById('entry_estudia').value,
+                religion: document.getElementById('entry_religion').value,
+                pie: document.getElementById('entry_pie').value,
+                emergencia: document.getElementById('entry_emergencia').value,
+                domicilio: document.getElementById('entry_domicilio').value,
+                celular: document.getElementById('entry_celular').value,
+                enfermedad: document.getElementById('entry_enfermedad').value,
+                chile_solidario: document.getElementById('chile_solidario_var').checked ? 1 : 0,
+                presento_certificado: document.getElementById('presento_certificado_var').checked ? 1 : 0,
+                necesita_PAE: document.getElementById('necesita_PAE_var').checked ? 1 : 0,
+                figura_pate: document.getElementById('figura_pate_var').checked ? 1 : 0,
+                fig_aporta_recursos: document.getElementById('fig_aporta_recursos_var').checked ? 1 : 0,
+                locomocion: document.getElementById('locomocion_var').checked ? 1 : 0,
+                asistereligion: document.getElementById('asistereligion_var').checked ? 1 : 0,
+                ano_madre: document.getElementById('selected_ano_madre').value,
+                ano_jefe: document.getElementById('selected_ano_jefe').value,
+                curso,
+                letra
+            };
+
+            // Enviar datos al backend
+            try {
+                const response = await fetch('http://localhost:5000/api/alumno', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    const successAlert = document.querySelector('.success-alert');
+                    successAlert.style.display = 'block';
+                    setTimeout(() => { successAlert.style.display = 'none'; }, 3000);
+                } else {
+                    alert('Error al guardar los datos');
+                }
+            } catch (err) {
+                alert('No se pudo conectar con el servidor');
+            }
+        });
+        document.getElementById('entry_rut').addEventListener('blur', function() {
+            if (this.value && !validarRUT(this.value)) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+        // Validación en tiempo real para campos numéricos
+        const numericFields = [
+            'entry_cursos_repetidos', 'entry_n_hermanos', 'entry_hermanos_estudian',
+            'entry_hermanos_no_estudian', 'entry_vive_hogar', 'entry_otros_viven'
+        ];
+        numericFields.forEach(fieldId => {
+            document.getElementById(fieldId).addEventListener('blur', function() {
+                if (this.value && isNaN(this.value)) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
