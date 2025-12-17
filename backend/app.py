@@ -57,7 +57,7 @@ def obtener_alumno(rut):
 def listar_alumnos():
     conn = get_db()
     c = conn.cursor()
-    c.execute('SELECT * FROM alumnos ORDER BY id DESC LIMIT 40')
+    c.execute('SELECT * FROM alumnos ORDER BY rut DESC LIMIT 40')
     alumnos = [dict(row) for row in c.fetchall()]
     conn.close()
     return jsonify(alumnos)
